@@ -20,8 +20,9 @@ It detects **exploitable CSP directives**, maps them to **real payloads**, gener
 ## 📦 Installation:
 
 ```bash
-pipx install git+https://github.com/dipakpanchal05/cspvalidator
-cspvalidator --help
+git clone https://github.com/dipakpanchal05/cspvalidator.git
+cd cspvalidator
+pip install .
 ```
 
 ## 🚀 Usage:
@@ -45,15 +46,6 @@ cspvalidator -s "default-src *; script-src 'unsafe-inline'"
 ```bash
 cspvalidator -s csp.txt
 ```
-
-### Pipe input
-```bash
-echo "default-src *; script-src 'unsafe-inline'" | cspvalidator
-echo "https://example.com" | cspvalidator
-cat csp.txt | cspvalidator
-
-```
-
 ---
 
 ## 🧪 Output Modes:
