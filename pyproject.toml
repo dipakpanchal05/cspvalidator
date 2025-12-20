@@ -1,0 +1,15 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "cspvalidator"
+version = "1.0.0"
+description = "CSPValidator is a practical Content Security Policy (CSP) analysis tool on OWASP based."
+readme = "README.md"
+license = {text = "MIT"}
+authors = [{name = "Dipak Panchal"}]
+dependencies = ["requests"]
+
+[project.scripts]
+cspvalidator = "cspvalidator.cli:main"
