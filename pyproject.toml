@@ -8,8 +8,8 @@ version = "1.0.0"
 description = "CSPValidator is a practical Content Security Policy (CSP) analysis tool on OWASP based."
 readme = "README.md"
 license = {text = "MIT"}
-authors = [{name = "Dipak Panchal"}]
 dependencies = ["requests"]
+author = [{name = "Dipak Panchal"}]
 
 [project.scripts]
 cspvalidator = "cspvalidator.cli:main"
