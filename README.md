@@ -6,7 +6,7 @@ It detects **exploitable CSP directives**, maps them to **real payloads**, gener
 
 ---
 
-## ✨ Features:
+## ✨ Features
 
 - 🔍 Detects **real CSP misconfigurations**
 - 💥 Shows **exploitable directives with payloads**
@@ -17,22 +17,21 @@ It detects **exploitable CSP directives**, maps them to **real payloads**, gener
 
 ---
 
-## 📦 Installation:
+## 📦 Installation
 
 ```bash
-git clone https://github.com/dipakpanchal05/cspvalidator.git
-cd cspvalidator
-pip install .
+pipx install git+https://github.com/dipakpanchal05/cspvalidator
+cspvalidator
 ```
 
-## 🚀 Usage:
+## 🚀 Usage
 
 ### Analyze a domain
 ```bash
-cspvalidator -u example.com
+cspvalidator -u https://example.com
 ```
 
-### Analyze multiple domains
+### Analyze multiple domains [http probed]
 ```bash
 cspvalidator -f domains.txt
 ```
@@ -48,7 +47,7 @@ cspvalidator -s csp.txt
 ```
 ---
 
-## 🧪 Output Modes:
+## 🧪 Output Modes
 
 ### Default (no flags)
 Shows:
@@ -64,31 +63,31 @@ cspvalidator -u example.com
 
 ### Only vulnerabilities
 ```bash
-cspvalidator -u example.com -vuln
+cspvalidator -u https://example.com -vuln
 ```
 
 ### Only score
 ```bash
-cspvalidator -u example.com -score
+cspvalidator -u https://example.com -score
 ```
 
 ### Only hardened CSP
 ```bash
-cspvalidator -u example.com -harden
+cspvalidator -u https://example.com -harden
 ```
 
 ### Combined flags
 ```bash
-cspvalidator -u example.com -score -vuln
-cspvalidator -u example.com -vuln -harden
+cspvalidator -u https://example.com -score -vuln
+cspvalidator -u https://example.com -vuln -harden
 ```
 
 ---
 
-## 💾 Save Hardened CSP:
+## 💾 Save Hardened CSP
 
 ```bash
-cspvalidator -u example.com -o hardened_csp.txt
+cspvalidator -u https://example.com -o hardened_csp.txt
 ```
 
 - Saves **only hardened CSP**
@@ -97,12 +96,12 @@ cspvalidator -u example.com -o hardened_csp.txt
 
 ---
 
-## 📊 CSP Score:
+## 📊 CSP Score
 
 - **100** → Strong CSP
 - **0** → Broken CSP
 
-Score penalties include:
+Score penalties include
 - `default-src *`
 - `script-src 'unsafe-inline'`
 - Wildcards
@@ -110,7 +109,7 @@ Score penalties include:
 
 ---
 
-## 🧱 Hardened CSP Philosophy:
+## 🧱 Hardened CSP Philosophy
 
 - Removes insecure values (`*`, `'unsafe-inline'`)
 - Preserves domains but **warns**
@@ -125,7 +124,7 @@ Nothing is suggested unless changed.
 
 ---
 
-## 🧠 Suggestions Logic:
+## 🧠 Suggestions Logic
 
 Suggestions are generated **only when actual changes occur**:
 
@@ -138,7 +137,7 @@ Example:
 
 ---
 
-## 🔐 OWASP Coverage:
+## 🔐 OWASP Coverage
 
 - OWASP CSP Cheat Sheet. [here](https://owasp.org/www-community/controls/Content_Security_Policy)
 - DOM XSS mitigation.
@@ -147,17 +146,7 @@ Example:
 
 ---
 
-## 🛠️ Ideal For:
-
-- Pentesters
-- Bug bounty hunters
-- Security engineers
-- CI/CD pipelines
-- CSP audits
-
----
-
-## 👤 Author:
+## 👤 Author
 
 **Made by** `</th3.d1p4k>`  
 ***Security-first. Real exploits only.***
