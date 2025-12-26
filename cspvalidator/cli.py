@@ -3,7 +3,6 @@ import argparse
 import sys
 import requests
 
-# Payloads
 PAYLOADS = {
     "script-src": "<script src=https://evil.example/x.js></script>",
     "img-src": "<img src=x onerror=alert(1)>",
@@ -29,7 +28,7 @@ def fetch_csp(url):
     except Exception:
         return None
 
-# Analyzer (NO NOISE)
+# Analyzer
 def analyze(policy):
     vulns = []
 
@@ -62,7 +61,7 @@ def score(policy):
         s -= 5
     return max(s, 0)
 
-# Harden CSP
+# Harden CSP + diff
 def harden(policy):
     hardened = {}
     suggestions = []
@@ -105,14 +104,10 @@ def harden(policy):
         hardened[d] = v
 
     if removed:
-        suggestions.append(
-            "Removed insecure directives: " + ", ".join(removed)
-        )
+        suggestions.append("Removed insecure directives: " + ", ".join(removed))
 
     if added:
-        suggestions.append(
-            "Added missing directives: " + ", ".join(added)
-        )
+        suggestions.append("Added missing directives: " + ", ".join(added))
 
     if "script-src" in policy and any("maps.googleapis.com" in x for x in policy["script-src"]):
         suggestions.append(
@@ -153,8 +148,7 @@ def process(csp, source, args):
             print("None")
 
     if args.harden or not only_specific:
-        hcsp = render(hardened)
-        print("\nHardened CSP:\n" + hcsp)
+        print("\nHardened CSP:\n" + render(hardened))
 
         if not args.harden:
             print("\nSuggestions:")
@@ -165,23 +159,43 @@ def process(csp, source, args):
         with open(args.output, "w") as f:
             f.write(render(hardened))
 
+# HELP
+def usage():
+    print("""
+Usage:
+
+INPUT:
+  -u <url>              Scan CSP from URL
+  -f <file>             Scan URLs from file [HTTP probed]
+  -s <csp|string|file>  Scan raw CSP or CSP file
+  
+OPTIONS:
+  -vuln                 Show vulnerable directives + payloads
+  -score                Show CSP score
+  -harden               Show hardened CSP
+  -o <file|path>        Save hardened CSP only [i.e. csp.txt]
+
+EXAMPLES:
+  cspvalidator -u https://example.com -score -vuln
+  cspvalidator -f urls.txt -vuln
+  cspvalidator -s "default-src *; script-src 'unsafe-inline'"
+""")
+    sys.exit(0)
+
 # CLI
 def main():
-    ap = argparse.ArgumentParser(
-        description="CSP Validator — exploit detection & OWASP hardening"
-    )
-    ap.add_argument("-u", "--url")
-    ap.add_argument("-f", "--file")
-    ap.add_argument("-s", "--string")
-    ap.add_argument("-o", "--output", help="Save hardened CSP only")
-    ap.add_argument("-score", action="store_true")
-    ap.add_argument("-vuln", action="store_true")
-    ap.add_argument("-harden", action="store_true")
-    args = ap.parse_args()
+    if len(sys.argv) == 1 or any(x in sys.argv for x in ("-h", "--help")):
+        usage()
 
-    if not any([args.url, args.file, args.string]) and sys.stdin.isatty():
-        ap.print_help()
-        sys.exit(0)
+    parser = argparse.ArgumentParser(add_help=False)
+    parser.add_argument("-u", "--url")
+    parser.add_argument("-f", "--file")
+    parser.add_argument("-s", "--string")
+    parser.add_argument("-o", "--output")
+    parser.add_argument("-score", action="store_true")
+    parser.add_argument("-vuln", action="store_true")
+    parser.add_argument("-harden", action="store_true")
+    args = parser.parse_args()
 
     if args.url:
         url = args.url if args.url.startswith("http") else "https://" + args.url
