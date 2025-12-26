@@ -8,11 +8,10 @@ It detects **exploitable CSP directives**, maps them to **real payloads**, gener
 
 ## ✨ Features
 
-- 🔍 Detects **real CSP misconfigurations**
+- 🔍 Detects **CSP misconfigurations**
 - 💥 Shows **exploitable directives with payloads**
 - 🧱 Generates **OWASP-aligned hardened CSP**
 - 📊 CSP **security score (0–100)**
-- 🧠 **Diff-based suggestions**
 - 💾 Save hardened CSP only (clean output)
 
 ---
