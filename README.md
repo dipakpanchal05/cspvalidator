@@ -20,7 +20,7 @@ It detects **exploitable CSP directives**, maps them to **real payloads**, gener
 
 ```bash
 pipx install git+https://github.com/dipakpanchal05/cspvalidator
-cspvalidator
+cspvalidator -h
 ```
 
 ## 🚀 Usage
@@ -44,22 +44,6 @@ cspvalidator -s "default-src *; script-src 'unsafe-inline'"
 ```bash
 cspvalidator -s csp.txt
 ```
----
-
-## 🧪 Output Modes
-
-### Default (no flags)
-Shows:
-- Target
-- Score
-- Vulnerable directives + payloads
-- Hardened CSP
-- Suggestions
-
-```bash
-cspvalidator -u example.com
-```
-
 ### Only vulnerabilities
 ```bash
 cspvalidator -u https://example.com -vuln
@@ -80,6 +64,17 @@ cspvalidator -u https://example.com -harden
 cspvalidator -u https://example.com -score -vuln
 cspvalidator -u https://example.com -vuln -harden
 ```
+---
+
+## 🧪 Output Modes
+
+### Default (no flags)
+Shows:
+- Target
+- Score
+- Vulnerable directives + payloads
+- Hardened CSP
+- Suggestions
 
 ---
 
