@@ -9,7 +9,8 @@ description = "CSPValidator is a practical Content Security Policy (CSP) analysi
 readme = "README.md"
 license = {text = "MIT"}
 dependencies = ["requests"]
-author = [{name = "Dipak Panchal"}]
+authors = [{name = "Dipak Panchal"}]
 
 [project.scripts]
 cspvalidator = "cspvalidator.cli:main"
+
