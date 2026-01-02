@@ -2,6 +2,50 @@
 import argparse
 import sys
 import requests
+import random
+
+# BANNERS
+BANNERS = [
+r"""
+   _____  _____ _____   __      __   _ _     _       _             
+  / ____|/ ____|  __ \  \ \    / /  | (_)   | |     | |            
+ | |    | (___ | |__) |  \ \  / /_ _| |_  __| | __ _| |_ ___  _ __ 
+ | |     \___ \|  ___/    \ \/ / _` | | |/ _` |/ _` | __/ _ \| '__|
+ | |____ ____) | |         \  / (_| | | | (_| | (_| | || (_) | |   
+  \_____|_____/|_|          \/ \__,_|_|_|\__,_|\__,_|\__\___/|_|   
+                                                                   
+""",
+r"""
+       (   (                                             
+   (   )\ ))\ )              (     (           )         
+   )\ (()/(()/(   (   (    ) )\(   )\ )   ) ( /(    (    
+ (((_) /(_))(_))  )\  )\( /(((_)\ (()/(( /( )\())(  )(   
+ )\___(_))(_))   ((_)((_)(_))_((_) ((_))(_)|_))/ )\(()\  
+((/ __/ __| _ \  \ \ / ((_)_| |(_) _| ((_)_| |_ ((_)((_) 
+ | (__\__ \  _/   \ V // _` | || / _` / _` |  _/ _ \ '_| 
+  \___|___/_|      \_/ \__,_|_||_\__,_\__,_|\__\___/_|   
+                                                                                                                            
+""",
+r"""
+   ___________ ____     _    __      ___     __      __            
+  / ____/ ___// __ \   | |  / /___ _/ (_)___/ /___ _/ /_____  _____
+ / /    \__ \/ /_/ /   | | / / __ `/ / / __  / __ `/ __/ __ \/ ___/
+/ /___ ___/ / ____/    | |/ / /_/ / / / /_/ / /_/ / /_/ /_/ / /    
+\____//____/_/         |___/\__,_/_/_/\__,_/\__,_/\__/\____/_/     
+                                                                                                                                      
+""",
+r"""
+   ___ ___ ___  __   __    _ _    _      _           
+  / __/ __| _ \ \ \ / /_ _| (_)__| |__ _| |_ ___ _ _ 
+ | (__\__ \  _/  \ V / _` | | / _` / _` |  _/ _ \ '_|
+  \___|___/_|     \_/\__,_|_|_\__,_\__,_|\__\___/_|  
+                                                                                                                        
+"""
+]
+
+def banner():
+    print(random.choice(BANNERS))
+    print("             by </th3.d1p4k>\n")
 
 PAYLOADS = {
     "script-src": "<script src=https://evil.example/x.js></script>",
@@ -159,7 +203,7 @@ def process(csp, source, args):
         with open(args.output, "w") as f:
             f.write(render(hardened))
 
-# HELP
+# SIMPLE HELP
 def usage():
     print("""
 Usage:
@@ -173,7 +217,7 @@ OPTIONS:
   -vuln                 Show vulnerable directives + payloads
   -score                Show CSP score
   -harden               Show hardened CSP
-  -o <file|path>        Save hardened CSP only [i.e. csp.txt]
+  -o <file|path>        Save hardened CSP only
 
 EXAMPLES:
   cspvalidator -u https://example.com -score -vuln
@@ -182,8 +226,11 @@ EXAMPLES:
 """)
     sys.exit(0)
 
+# ===============================
 # CLI
+# ===============================
 def main():
+    banner()
     if len(sys.argv) == 1 or any(x in sys.argv for x in ("-h", "--help")):
         usage()
 
@@ -196,7 +243,7 @@ def main():
     parser.add_argument("-vuln", action="store_true")
     parser.add_argument("-harden", action="store_true")
     args = parser.parse_args()
-
+    
     if args.url:
         url = args.url if args.url.startswith("http") else "https://" + args.url
         csp = fetch_csp(url)
