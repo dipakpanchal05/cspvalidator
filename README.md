@@ -1,4 +1,4 @@
-<p align="center"><img width="700" height="270" src="https://github.com/user-attachments/assets/e4298598-9f90-4a27-adb5-75f1b1615c8f" /></p>
+<p align="center"><img width="700" height="370" src="https://github.com/user-attachments/assets/b484871d-3173-4ff1-ac80-d300582e4193" /></p>
 
 # 🛡️ CSPValidator — Real CSP Exploit Detection & Hardening
 
