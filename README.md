@@ -1,3 +1,5 @@
+<p align="center"><img width="700" height="270" src="https://github.com/user-attachments/assets/e4298598-9f90-4a27-adb5-75f1b1615c8f" /></p>
+
 # 🛡️ CSPValidator — Real CSP Exploit Detection & Hardening
 
 CSPValidator is a **practical Content Security Policy (CSP) analysis tool** focused on real-world security impact.
